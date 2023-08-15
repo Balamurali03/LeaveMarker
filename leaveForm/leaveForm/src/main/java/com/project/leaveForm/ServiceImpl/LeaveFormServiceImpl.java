@@ -22,31 +22,25 @@ public class LeaveFormServiceImpl implements LeaveFormService {
 
 	@Override
 	public String grantLeave(LeaveFormResponse leaveForm) {
-		
-		String startDate= leaveForm.getStartDate();
-		String endDate= leaveForm.getEndDate();
-		
-		int[] dateArray = Arrays.stream(startDate.split("/"))
-		          .mapToInt(Integer::parseInt)
-		          .toArray();
-		 // System.out.println(dateArray[0]+" "+dateArray[1]+" "+dateArray[2]);
-		  int[] dateArray1 = Arrays.stream(endDate.split("/"))
-		          .mapToInt(Integer::parseInt)
-		          .toArray();
-		 // System.out.println(dateArray1[0]+" "+dateArray1[1]+" "+dateArray1[2]);
-		  
-		  LocalDate date1 = LocalDate.of(dateArray[2], dateArray[1], dateArray[0]);
-		  LocalDate date2 = LocalDate.of(dateArray1[2], dateArray1[1], dateArray1[0]);
-		 
 
-		  long daysDifference = ChronoUnit.DAYS.between(date1, date2);
-		  System.out.println(daysDifference);
+		String startDate = leaveForm.getStartDate();
+		String endDate = leaveForm.getEndDate();
 
-	           
-		for(long i=0;i<=daysDifference;i++) {
-			
+		int[] dateArray = Arrays.stream(startDate.split("/")).mapToInt(Integer::parseInt).toArray();
+		// System.out.println(dateArray[0]+" "+dateArray[1]+" "+dateArray[2]);
+		int[] dateArray1 = Arrays.stream(endDate.split("/")).mapToInt(Integer::parseInt).toArray();
+		// System.out.println(dateArray1[0]+" "+dateArray1[1]+" "+dateArray1[2]);
+
+		LocalDate date1 = LocalDate.of(dateArray[2], dateArray[1], dateArray[0]);
+		LocalDate date2 = LocalDate.of(dateArray1[2], dateArray1[1], dateArray1[0]);
+
+		long daysDifference = ChronoUnit.DAYS.between(date1, date2);
+		System.out.println(daysDifference);
+
+		for (long i = 0; i <= daysDifference; i++) {
+
 			LeaveFormEntity form = new LeaveFormEntity();
-			
+
 			form.setId(leaveForm.getId());
 			form.setEmpId(leaveForm.getEmpId());
 			form.setEmpName(leaveForm.getEmpName());
@@ -54,7 +48,7 @@ public class LeaveFormServiceImpl implements LeaveFormService {
 			form.setEndDate(leaveForm.getEndDate());
 			form.setLeaveType(leaveForm.getLeaveType());
 			form.setReason(leaveForm.getReason());
-			
+
 			leaveFormRepo.save(form);
 		}
 
