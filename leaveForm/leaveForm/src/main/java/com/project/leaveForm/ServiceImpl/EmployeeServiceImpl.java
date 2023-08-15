@@ -19,8 +19,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public String saveEmployeeData(EmployeeResponse employee) {
 		
-		EmployeeEntity employeeDataCheck=employeeRepo.findById(employee.getEmpId()).get();
-		if(employeeDataCheck == null) {
+		boolean employeeDataCheck=employeeRepo.existsById(employee.getEmpId());
+		if(employeeDataCheck == false) {
 			EmployeeEntity employeeData= new EmployeeEntity();
 			employeeData.setId(employee.getId());
 			employeeData.setEmpId(employee.getEmpId());
