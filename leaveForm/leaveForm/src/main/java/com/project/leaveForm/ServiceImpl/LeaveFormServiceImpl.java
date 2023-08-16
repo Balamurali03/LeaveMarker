@@ -23,7 +23,7 @@ public class LeaveFormServiceImpl implements LeaveFormService {
 	@Override
 	public String grantLeave(LeaveFormResponse leaveForm) {
 
-		String startDate = leaveForm.getStartDate();
+		String startDate = leaveForm.getStartDate();//16/08/2023
 		String endDate = leaveForm.getEndDate();
 
 		int[] dateArray = Arrays.stream(startDate.split("/")).mapToInt(Integer::parseInt).toArray();
@@ -35,16 +35,39 @@ public class LeaveFormServiceImpl implements LeaveFormService {
 		LocalDate date2 = LocalDate.of(dateArray1[2], dateArray1[1], dateArray1[0]);
 
 		long daysDifference = ChronoUnit.DAYS.between(date1, date2);
-		System.out.println(daysDifference);
+		//System.out.println(daysDifference);
+//		Date date=new Date();
+//		 DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//	        try {
+//	            Date parsedDate = formatter.parse(startDate);
+//	            System.out.println(parsedDate);
+//	            date=parsedDate;
+//	        } catch (ParseException e) {
+//	            e.printStackTrace();
+//	        }
 
 		for (long i = 0; i <= daysDifference; i++) {
+			
+			 LocalDate currentDate = date1.plusDays(i);
+			String day= "";
+			if(currentDate.getDayOfMonth()<10) {
+				day=day+'0'+currentDate.getDayOfMonth();
+			} else {
+				day=day+currentDate.getDayOfMonth();
+			}
+			String month= "";
+			if(currentDate.getMonthValue()<10) {
+				month=month+'0'+currentDate.getMonthValue();
+			} else {
+				month=month+currentDate.getMonthValue();
+			}
 
 			LeaveFormEntity form = new LeaveFormEntity();
 
 			form.setId(leaveForm.getId());
 			form.setEmpId(leaveForm.getEmpId());
 			form.setEmpName(leaveForm.getEmpName());
-			form.setStartDate(leaveForm.getStartDate());
+			form.setStartDate(day+"/"+month+"/"+currentDate.getYear());
 			form.setEndDate(leaveForm.getEndDate());
 			form.setLeaveType(leaveForm.getLeaveType());
 			form.setReason(leaveForm.getReason());

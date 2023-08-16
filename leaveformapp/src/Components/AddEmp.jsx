@@ -1,5 +1,6 @@
 import{useState,useEffect} from "react";
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AddEmp() {
 
@@ -40,39 +41,44 @@ function AddEmp() {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+
+            alert("Employee Added");
+                    window.location.reload();  
       };
 
 
     
     return(
-        <>
+        < div className="container">
         <h1>This is Add Data Page</h1>
         <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-group">
         <label>
           Employee ID:
           <input type="number" name="empId" value={formData.empId} onChange={handleChange} />
         </label>
-        <br />
+        
         <label>
           Employee Name:
           <input type="text" name="empName" value={formData.empName} onChange={handleChange} />
         </label>
-        <br />
+       <br />
+       <br />
         <label>
           Email ID:
           <input type="email" name="mailId" value={formData.mailId} onChange={handleChange} />
         </label>
-        <br />
+        
         <label>
           Age:
           <input type="number" name="age" value={formData.age} onChange={handleChange} />
         </label>
         <br />
+        <br />
         <button type="submit">Save Data</button>
       </form>
     </div>
-        </>
+        </div>
     )
 }
 

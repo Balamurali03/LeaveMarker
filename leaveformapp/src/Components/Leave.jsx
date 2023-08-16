@@ -161,7 +161,8 @@ function Leave() {
             .catch(error => console.log('error', error));
       
             
-                          
+                    alert("Leave Applied");
+                    window.location.reload();      
 
 
       };
@@ -177,24 +178,26 @@ function Leave() {
         <input type="number" name="empId" 
         value={formData.empId} onChange={handleChangeId} required/>
       </label>
-      <br />
+     
       <label>
         Employee Name:
         <input type="text" name="empName" 
         value={formData.empName} onChange={handleChange} />
       </label>
       <br />
+      <br />
       <label>
         Start Date:
         <input type="date" name="startDate" 
         value={formData.startDate} onChange={handleChange} required/>
       </label>
-      <br />
+      
       <label>
         End Date:
         <input type="date" name="endDate" 
         value={formData.endDate} onChange={handleChange} required/>
       </label>
+      <br />
       <br />
       <label>
         Leave Type:
@@ -206,11 +209,12 @@ function Leave() {
           ))}
         </select>
       </label>
-      <br />
+      
       <label>
         Reason:
         <textarea name="reason" value={formData.reason} onChange={handleChange} />
       </label>
+      <br />
       <br />
       <button type="submit">Save</button>
     </form>
@@ -225,13 +229,13 @@ function Leave() {
         >
           Download
         </CSVLink></button>
-      <DataTable
+     <div style={{height:"250px",overflowY:"scroll" }}> <DataTable
         columns={columns}
         data={lists}
         pagination
         highlightOnHover
         striped
-      />
+      /></div>
         </div>
         </>
     )
